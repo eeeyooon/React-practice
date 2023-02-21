@@ -1,34 +1,29 @@
-import React from "react";
+import { useState } from 'react';
 
-function Counter(props) {
-  //함수 안에 지역 변수 선언
-  //let count = 1;
-
-  //React Hook
-  //상태 관리 React.useState()
-  const [count, setCount] = React.useState(props.count); 
-
-  //함수 안에 이벤트 청취 함수를 작성한다.
-  const handleIncrement = () => { 
-    console.log('카운트 값 증가');
-    count++; //수정(mutation)
-   }
-  const handleDecrement = () => {
-    console.log('카운트 값 감소');
-    count--;
-   }
+function Counter({ min = 1, count: initialCount = 1, max = 10, step = 1 }) {
+  let [count, setCount] = useState(initialCount);
+  const handleIncrement = () => setCount(count + step);
+  const handleDecrement = () => setCount(count - step);
 
   return (
     <div className="Counter">
-      <button type="button">+</button>
-      <output>1</output>
-      <button type="button">-</button>
+      <button
+        type="button"
+        aria-label="카운트 1 증가"
+        onClick={handleIncrement}
+      >
+        +
+      </button>
+      <output>{count}</output>
+      <button
+        type="button"
+        aria-label="카운트 1 감소"
+        onClick={handleDecrement}
+      >
+        -
+      </button>
     </div>
-  )
-}
-
-Counter.defaultProps = {
-  
+  );
 }
 
 export default Counter;
